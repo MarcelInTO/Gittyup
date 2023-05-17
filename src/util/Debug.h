@@ -6,10 +6,10 @@
 namespace Debug {
 	namespace {
 			const QString kLogKey = "debug/log";
-			static bool logging = false;
+			bool logging = false;
 	}
-	void setLogging(bool log) {
-		logging = log;
+	void setLogging(bool enable) {
+		logging = enable;
 		QSettings().setValue(kLogKey, enable);
 	}
 	
