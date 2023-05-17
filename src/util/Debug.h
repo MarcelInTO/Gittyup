@@ -1,29 +1,16 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
-#include <QDebug>
-#include <QSettings>
-
 namespace Debug {
-	namespace {
-			const QString kLogKey = "debug/log";
-			bool logging = false;
-	}
-	void setLogging(bool enable) {
-		logging = enable;
-		QSettings().setValue(kLogKey, enable);
-	}
 	
-	bool isLogging() {
-		logging = QSettings().value(kLogKey).toBool();
-		return logging;
-	}
+	void setLogging(bool enable);
+	bool isLogging();
 };
 
 #ifdef DEBUG_OUTPUT_GENERAL
 #define Debug(x)                                                               \
   do {                                                                         \
-    if (logging) \
+    if (Debug::isLogging()) \
 		qDebug() << x;                                                             \
   } while (false)
 #else
@@ -33,7 +20,7 @@ namespace Debug {
 #ifdef DEBUG_OUTPUT_REFRESH
 #define DebugRefresh(x)                                                        \
   do {                                                                         \
-    if (logging) \
+    if (Debug::isLogging()) \
 		qDebug() << Q_FUNC_INFO << QStringLiteral(": ") << x;                  \
   } while (false)
 #else
