@@ -3,10 +3,27 @@
 
 #include <QDebug>
 
+namespace Debug {
+	namespace {
+			const QString kLogKey = "debug/log";
+			static bool logging = false;
+	}
+	void setLogging(bool log) {
+		logging = log;
+		QSettings().setValue(kLogKey, enable);
+	}
+	
+	bool isLogging() {
+		logging = QSettings().value(kLogKey).toBool();
+		return logging;
+	}
+};
+
 #ifdef DEBUG_OUTPUT_GENERAL
 #define Debug(x)                                                               \
   do {                                                                         \
-    qDebug() << x;                                                             \
+    if (logging) \
+		qDebug() << x;                                                             \
   } while (false)
 #else
 #define Debug(x)
@@ -15,7 +32,8 @@
 #ifdef DEBUG_OUTPUT_REFRESH
 #define DebugRefresh(x)                                                        \
   do {                                                                         \
-    qDebug() << Q_FUNC_INFO << QStringLiteral(": ") << x;                      \
+    if (logging) \
+		qDebug() << Q_FUNC_INFO << QStringLiteral(": ") << x;                  \
   } while (false)
 #else
 #define DebugRefresh(x)
