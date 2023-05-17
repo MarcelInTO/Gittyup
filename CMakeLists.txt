@@ -94,7 +94,7 @@ if(UNIX)
   set(QT_MODULES ${QT_MODULES} DBus)
 endif()
 
-option(DEBUG_OUTPUT "Print debug output" ON)
+option(DEBUG_OUTPUT "Print debug output (Only available if debug menu is enabled!)" ON)
 option(DEBUG_OUTPUT_GENERAL "Enable general debug messages" ON)
 option(DEBUG_OUTPUT_REFRESH "Enable debug messages to debug the refresh flow" OFF)
 if(NOT DEBUG_OUTPUT)
