@@ -2,6 +2,7 @@
 #define DEBUG_H
 
 #include <QDebug>
+#include <QSettings>
 
 namespace Debug {
 	namespace {
